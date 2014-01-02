@@ -4,6 +4,11 @@ public class Driver {
 	private long id;
 	private String firstName, lastName, latestCoordinates, phoneNumber;
 	
+	public Driver(String firstName, String lastName){
+		this.firstName = firstName;
+		this.lastName = lastName;
+	}
+	
 	private void setId(long id){
 		this.id = id;
 	}
