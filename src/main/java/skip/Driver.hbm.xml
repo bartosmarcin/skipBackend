@@ -4,4 +4,13 @@
         "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping package="skip.Driver">
+	<class name='Driver' table='Drivers'>
+		<id name='id' column='DRIVER_ID'>
+			<generator class='native'/>
+		</id>
+		<property name='firstName'/>
+		<property name='lastName'/>
+		<property name='latestCoordinates'/>
+		<property name='phoneNumber'/>
+	</class>
 </hibernate-mapping>
