@@ -31,6 +31,8 @@ public class DriversManagerTest {
 	public void testAddDriver() {
 		Driver d = new Driver("test","driver");
 		mgr.addDriver(d);
+		Driver out = mgr.getDriverById(d.getId());
+		assertEquals(d,out);
 	}
 
 }
