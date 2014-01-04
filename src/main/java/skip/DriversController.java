@@ -24,4 +24,12 @@ public class DriversController {
 	public @ResponseBody List<Driver> getDriver(){
 		return dmgr.getDriversList();
 	}
+	
+	@RequestMapping(value="/remove/{id}")
+	public @ResponseBody Driver removeDriver(
+				@PathVariable("id") Long id){
+		return dmgr.removeDriver(id);
+	}
+	
+	
 }

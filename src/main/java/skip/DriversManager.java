@@ -12,11 +12,21 @@ import util.HibernateUtil;
 
 public class DriversManager {
 	
-	public void addDriver(Driver d){
+	public Driver addDriver(Driver d){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.save(d);
 		session.getTransaction().commit();
+		return d;
+	}
+	
+	public Driver removeDriver(long id){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		Driver d = (Driver) session.get(Driver.class, id);
+		session.delete(d);
+		session.getTransaction().commit();
+		return d;
 	}
 	
 	public Driver getDriverById(long id){
