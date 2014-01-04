@@ -1,9 +1,7 @@
 package skip;
 
-import org.hibernate.Hibernate;
-import org.hibernate.Session;
 
-import java.util.*;
+import org.hibernate.Session;
 
 import skip.Driver;
 import util.HibernateUtil;
@@ -21,8 +19,7 @@ public class DriversManager {
 	public Driver getDriverById(long id){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
-		Driver d = (Driver)session.get(Driver.class, id);	
-		Hibernate.initialize(d);
+		Driver d = (Driver)session.load(Driver.class, id);	
 		return d;
 	}
 
