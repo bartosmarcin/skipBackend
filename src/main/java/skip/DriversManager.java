@@ -6,11 +6,19 @@ import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
+import com.google.gson.Gson;
+
 import skip.Driver;
 import util.HibernateUtil;
 
 
 public class DriversManager {
+	
+	public Driver addDriver(String json){
+		Gson gson = new Gson();
+		Driver d = (Driver)gson.fromJson(json, Driver.class);
+		return this.addDriver(d);
+	}
 	
 	public Driver addDriver(Driver d){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();

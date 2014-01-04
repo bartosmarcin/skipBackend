@@ -14,7 +14,6 @@ public class Driver {
 		this.lastName = lastName;
 	}
 	
-	@SuppressWarnings("unused")
 	private void setId(long id){
 		this.id = id;
 	}

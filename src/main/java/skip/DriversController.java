@@ -31,5 +31,11 @@ public class DriversController {
 		return dmgr.removeDriver(id);
 	}
 	
+	@RequestMapping(value="/add/{json}")
+	public @ResponseBody Driver addDriver(
+				@PathVariable("json") String json){
+		return dmgr.addDriver(json);
+	}
+	
 	
 }
