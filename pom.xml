@@ -31,8 +31,12 @@
 		<dependency>
     		<groupId>org.hsqldb</groupId>
     		<artifactId>hsqldb</artifactId>
-    		<version>2.2.9</version>
 		</dependency>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+		</dependency>
+            
     </dependencies>
 
     <properties>
@@ -43,7 +47,6 @@
         <plugins>
             <plugin> 
                 <artifactId>maven-compiler-plugin</artifactId> 
-                <version>3.1</version> 
             </plugin>
             <plugin>
                 <groupId>org.springframework.boot</groupId>
@@ -68,6 +71,7 @@
             	<updatePolicy>never</updatePolicy>  
           	</snapshots>  
         </repository>
+        
     </repositories>
     <pluginRepositories>
         <pluginRepository>
