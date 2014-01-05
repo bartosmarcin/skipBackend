@@ -5,10 +5,19 @@ import java.util.List;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
+import com.google.gson.Gson;
+
 import util.HibernateUtil;
 
 public class VehiclesManager {
-	public Vehicle addVehicle(Vehicle v) {
+
+	public Vehicle addVehicle(String json) {
+		Gson gson = new Gson();
+		Vehicle v = (Vehicle) gson.fromJson(json, Vehicle.class);
+		return this.addVehicle(v);
+	}
+
+	private Vehicle addVehicle(Vehicle v) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.save(v);
@@ -33,12 +42,12 @@ public class VehiclesManager {
 		session.getTransaction().commit();
 		return v;
 	}
-	
-	public List<Vehicle> getVehiclesList(){
+
+	public List<Vehicle> getVehiclesList() {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		List<Vehicle> vlist = session.createCriteria(Vehicle.class).list();
 		session.getTransaction().commit();
-		return vlist;		
+		return vlist;
 	}
 }
