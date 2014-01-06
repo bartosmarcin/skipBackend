@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.springframework</groupId>
@@ -13,42 +16,63 @@
         <version>0.5.0.M6</version>
     </parent>
 
+    <properties>
+        <start-class>skip.Application</start-class>
+    </properties>
+    
+    <!-- DEPENDENCIES -->
     <dependencies>
+        <!-- Spring Boot -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
         <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <!-- Hibernate -->
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>4.3.0.CR2</version>
+        </dependency>
+        <!-- Databases -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-jdbc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derbyclient</artifactId>
+            <version>10.10.1.1</version>
+        </dependency>
+        <!-- Testing -->
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+        </dependency>
+        <!-- Utilities -->
+        <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
         </dependency>
-        
         <dependency>
-  			<groupId>org.hibernate</groupId>
-  			<artifactId>hibernate-core</artifactId>
-  			<version>4.3.0.CR2</version>
-		</dependency>
-		<dependency>
-    		<groupId>org.hsqldb</groupId>
-    		<artifactId>hsqldb</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.code.gson</groupId>
-			<artifactId>gson</artifactId>
-			<version>2.2.4</version>
-		</dependency>
-            
-            
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
+            <version>2.2.4</version>
+        </dependency>
     </dependencies>
 
-    <properties>
-        <start-class>skip.Application</start-class>
-    </properties>
-
+    <!-- BUILD -->
     <build>
         <plugins>
             <plugin> 
@@ -60,14 +84,14 @@
             </plugin>
         </plugins>
     </build>
-
+    
+    <!-- REPOSITORIES -->
     <repositories>
         <repository>
             <id>spring-snapshots</id>
             <url>http://repo.spring.io/libs-snapshot</url>
             <snapshots><enabled>true</enabled></snapshots>
-        </repository>
-        
+        </repository>    
         <repository>    
         	<id>jboss-public-repository-group</id>  
           	<name>JBoss Public Maven Repository Group</name>  
@@ -77,8 +101,9 @@
             	<updatePolicy>never</updatePolicy>  
           	</snapshots>  
         </repository>
-        
     </repositories>
+                     
+    <!-- PLUGIN REPOSITORIES -->
     <pluginRepositories>
         <pluginRepository>
             <id>spring-snapshots</id>
@@ -86,4 +111,5 @@
             <snapshots><enabled>true</enabled></snapshots>
         </pluginRepository>
     </pluginRepositories>
+    
 </project>
