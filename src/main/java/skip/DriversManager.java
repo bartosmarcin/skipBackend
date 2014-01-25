@@ -1,11 +1,15 @@
 package skip;
 
 
+import java.io.IOException;
 import java.util.List;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import skip.Driver;
@@ -15,9 +19,22 @@ import util.HibernateUtil;
 public class DriversManager {
 	
 	public Driver addDriver(String json){
-		Gson gson = new Gson();
-		Driver d = (Driver)gson.fromJson(json, Driver.class);
-		return this.addDriver(d);
+		ObjectMapper mapper = new ObjectMapper();
+		Driver d;
+		try {
+			d = mapper.readValue(json, Driver.class);
+			return this.addDriver(d);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
 	}
 	
 	public Driver addDriver(Driver d){
