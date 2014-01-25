@@ -12,6 +12,8 @@
 		<property name='lastName'/>
 		<property name='latestCoordinates'/>
 		<property name='phoneNumber'/>
+		<property name='phoneNumber2'/>
+		<property name='email'/>		
 		<property name='coordinatesUpdateDate' type='timestamp'/>
 	</class>
 </hibernate-mapping>

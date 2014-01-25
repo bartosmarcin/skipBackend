@@ -7,33 +7,33 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
-@RequestMapping(value="/drivers")
 public class DriversController {
 	DriversManager dmgr = new DriversManager();
 	
-	@RequestMapping(value="/{id}")
+	@RequestMapping(value="/drivers/{id}")
 	public @ResponseBody Driver getDriver(
 				@PathVariable("id") Long id){
 		return dmgr.getDriverById(id);
 	}
 	
-	@RequestMapping(value="/", method=RequestMethod.GET)
+	@RequestMapping(value="/drivers", method=RequestMethod.GET)
 	public @ResponseBody List<Driver> getDriver(){
 		return dmgr.getDriversList();
 	}
 	
-	@RequestMapping(value="/{id}", method=RequestMethod.DELETE)
+	@RequestMapping(value="/drivers/{id}", method=RequestMethod.DELETE)
 	public @ResponseBody Driver removeDriver(
 				@PathVariable("id") Long id){
 		return dmgr.removeDriver(id);
 	}
 	
-	@RequestMapping(value="/", method=RequestMethod.POST)
+	@RequestMapping(value="/drivers", method=RequestMethod.POST)
 	public @ResponseBody Driver addDriver(
-				@RequestBody(required=true) String json){
+				@RequestParam(required=true) String json){
 		return dmgr.addDriver(json);
 	}
 	
