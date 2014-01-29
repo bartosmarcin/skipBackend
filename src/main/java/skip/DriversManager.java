@@ -3,6 +3,12 @@ package skip;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validator;
+import javax.validation.Validation;
+import javax.validation.ValidatorFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
@@ -17,6 +23,12 @@ import util.HibernateUtil;
 
 
 public class DriversManager {
+	private Validator validator;
+	
+	public DriversManager(){
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
+	}
 	
 	public Driver addDriver(String json){
 		ObjectMapper mapper = new ObjectMapper();
@@ -38,6 +50,10 @@ public class DriversManager {
 	}
 	
 	public Driver addDriver(Driver d){
+		Set<ConstraintViolation<Driver>> 
+				errors = validator.validate(d, Driver.class);
+		if( errors.size() > 0)
+			return null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.save(d);
