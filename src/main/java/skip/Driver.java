@@ -2,9 +2,29 @@ package skip;
 
 import java.util.Date;
 
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
+
+import org.hibernate.validator.constraints.Email;
+
 public class Driver {
 	private long id;
-	private String firstName, lastName, latestCoordinates, phoneNumber, phoneNumber2, email;
+	
+	@Size(min=3, max=64)
+	@Pattern(regexp="^[a-zA-Z-]*$")
+	private String firstName, lastName;
+	
+	@Pattern(regexp="^[NS](?:[0-8]\\d\\.\\d{7}|90\\.0{7}) [WE](?:1[0-7]\\d\\.\\d{7}|180\\.0{7}|\\d{2}\\.\\d{7})$")
+	private String latestCoordinates;
+	
+	@Digits(integer=12, fraction=0)
+	private String phoneNumber, phoneNumber2;
+	
+	@Email
+	@Size(max=64)
+	private String email;
+	
 	private Date coordinatesUpdateDate;
 	
 	public Driver(){}
