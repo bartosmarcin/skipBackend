@@ -2,6 +2,9 @@ package skip;
 
 import java.util.List;
 
+import javax.validation.Validation;
+import javax.validation.Validator;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class DriversController {
 	DriversManager dmgr = new DriversManager();
+	Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+
 	
 	@RequestMapping(value="/drivers/{id}")
 	public @ResponseBody Driver getDriver(
@@ -33,8 +38,18 @@ public class DriversController {
 	
 	@RequestMapping(value="/drivers", method=RequestMethod.POST)
 	public @ResponseBody Driver addDriver(
-				@RequestParam(required=true) String json){
+				@RequestBody(required=true) String json){
 		return dmgr.addDriver(json);
+	}
+	
+	@RequestMapping(value="/test")
+	public @ResponseBody Driver testValidation(){
+		Driver d = new Driver();
+		d.setFirstName("FirstName");
+		d.setLastName("lastName");
+		d.setEmail("email@em.com");
+		d.setLatestCoordinates("N00.1234567 W87.1234567");
+		return dmgr.addDriver(d);
 	}
 	
 	
