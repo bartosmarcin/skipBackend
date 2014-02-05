@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class DriversController {
 	DriversManager dmgr = new DriversManager();
-	Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
 
 	
 	@RequestMapping(value="/drivers/{id}")
@@ -38,7 +37,7 @@ public class DriversController {
 	
 	@RequestMapping(value="/drivers", method=RequestMethod.POST)
 	public @ResponseBody Driver addDriver(
-				@RequestBody(required=true) String json){
+				@RequestParam(required=true) String json){
 		return dmgr.addDriver(json);
 	}
 	
@@ -49,6 +48,8 @@ public class DriversController {
 		d.setLastName("lastName");
 		d.setEmail("email@em.com");
 		d.setLatestCoordinates("N00.1234567 W87.1234567");
+		d.setPhoneNumber("123456789");
+		d.setPhoneNumber("123456789");
 		return dmgr.addDriver(d);
 	}
 	
