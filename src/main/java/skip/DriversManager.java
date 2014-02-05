@@ -26,8 +26,8 @@ public class DriversManager {
 	private Validator validator;
 	
 	public DriversManager(){
-		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
-		validator = factory.getValidator();
+        ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+        validator = factory.getValidator();
 	}
 	
 	public Driver addDriver(String json){
@@ -51,7 +51,7 @@ public class DriversManager {
 	
 	public Driver addDriver(Driver d){
 		Set<ConstraintViolation<Driver>> 
-				errors = validator.validate(d, Driver.class);
+				errors = validator.validate(d);
 		if( errors.size() > 0)
 			return null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
