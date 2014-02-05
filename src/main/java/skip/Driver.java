@@ -18,7 +18,7 @@ public class Driver {
 	@Pattern(regexp="^[NS](?:[0-8]\\d\\.\\d{7}|90\\.0{7}) [WE](?:1[0-7]\\d\\.\\d{7}|180\\.0{7}|\\d{2}\\.\\d{7})$")
 	private String latestCoordinates;
 	
-	@Digits(integer=12, fraction=0)
+	@Pattern(regexp="\\d{3,12}")
 	private String phoneNumber, phoneNumber2;
 	
 	@Email
