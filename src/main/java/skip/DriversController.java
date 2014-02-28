@@ -41,7 +41,7 @@ public class DriversController {
 		return dmgr.addDriver(json);
 	}
 	
-	@RequestMapping(value="/test")
+	@RequestMapping(value="/test_1")
 	public @ResponseBody Driver testValidation(){
 		Driver d = new Driver();
 		d.setFirstName("FirstName");

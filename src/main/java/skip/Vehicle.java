@@ -1,25 +1,34 @@
 package skip;
 
+import javax.validation.constraints.Pattern;
+
 public class Vehicle {
 	private long id;
-	private int maxLoad;
-	private String brand, colour, regNumber;
+	
+	@Pattern(regexp="^[0-9]{1,20}$")
+	private int truckload;
+	
+	@Pattern(regexp="^[a-zA-Z-]{3,64}$")
+	private String brand, colour;
+	
+	@Pattern(regexp="^[A-Z0-9-]{4,12}$")
+	private String registrationNumber;
 	
 	public Vehicle() {}
-	
+	 
 	public Vehicle(int maxLoad, String brand, String colour, String regNumber){
-		this.maxLoad = maxLoad;
+		this.truckload = maxLoad;
 		this.brand = brand;
 		this.colour = colour;
-		this.regNumber = regNumber;
+		this.registrationNumber = regNumber;
 	}
 	
 	public long getId() {
 		return id;
 	}
 	
-	public int getMaxLoad() {
-		return maxLoad;
+	public int getTruckload() {
+		return truckload;
 	}
 	
 	public String getBrand(){
@@ -31,7 +40,7 @@ public class Vehicle {
 	}
 	
 	public String getRegNumber() {
-		return regNumber;
+		return registrationNumber;
 	}
 	
 	@SuppressWarnings("unused")
@@ -39,8 +48,8 @@ public class Vehicle {
 		this.id = ID;
 	}
 	
-	public void setMaxLoad(int maxLoad){
-		this.maxLoad = maxLoad;
+	public void setTruckload(int maxLoad){
+		this.truckload = maxLoad;
 	}
 	
 	public void setBrand(String brand){
@@ -52,6 +61,6 @@ public class Vehicle {
 	}
 	
 	public void setRegNumber(String regNumber){
-		this.regNumber = regNumber;
+		this.registrationNumber = regNumber;
 	}
 }

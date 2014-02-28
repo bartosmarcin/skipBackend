@@ -1,23 +1,56 @@
 package skip;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Set;
+
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.gson.Gson;
 
 import util.HibernateUtil;
 
 public class VehiclesManager {
 
-	public Vehicle addVehicle(String json) {
-		Gson gson = new Gson();
-		Vehicle v = (Vehicle) gson.fromJson(json, Vehicle.class);
-		return this.addVehicle(v);
+	private Validator validator;
+
+	public VehiclesManager() {
+		ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
+		validator = factory.getValidator();
 	}
 
-	private Vehicle addVehicle(Vehicle v) {
+	public Vehicle addVehicle(String json) {
+		ObjectMapper mapper = new ObjectMapper();
+		Vehicle v;
+		try {
+			v = mapper.readValue(json, Vehicle.class);
+			return this.addVehicle(v);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	public Vehicle addVehicle(Vehicle v) {
+		Set<ConstraintViolation<Vehicle>> errors = validator.validate(v);
+		if (errors.size() > 0)
+			return null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.save(v);
