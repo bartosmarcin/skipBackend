@@ -39,10 +39,10 @@ public class VehicleController {
 	@RequestMapping(value="/test_2")
 	public @ResponseBody Vehicle testValidation(){
 		Vehicle v = new Vehicle();
-		v.setBrand("MERCEDES");
-		v.setColour("GREEN");
-		v.setRegNumber("KFD-212");
-		v.setTruckload(12000);
-		return vmgr.addVehicle(v);
+                v.setTruckload(10000);
+                v.setBrand("BMW");
+                v.setColour("BLUE");
+                v.setRegistrationNumber("KGB-997");
+                return vmgr.addVehicle(v);
 	}
 }

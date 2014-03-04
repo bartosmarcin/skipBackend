@@ -28,7 +28,7 @@ public class VehiclesManager {
 		validator = factory.getValidator();
 	}
 
-	public Vehicle addVehicle(String json) {
+	public Vehicle vehicleFromJson(String json) {
 		ObjectMapper mapper = new ObjectMapper();
 		Vehicle v;
 		try {
@@ -47,6 +47,13 @@ public class VehiclesManager {
 		return null;
 	}
 
+        public Vehicle addVehicle(String json){
+		Vehicle v = this.vehicleFromJson(json);
+		if(v == null)
+			return null;
+		return this.addVehicle(v);
+	}
+        
 	public Vehicle addVehicle(Vehicle v) {
 		Set<ConstraintViolation<Vehicle>> errors = validator.validate(v);
 		if (errors.size() > 0)

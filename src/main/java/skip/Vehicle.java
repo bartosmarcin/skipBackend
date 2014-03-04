@@ -1,11 +1,14 @@
 package skip;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Pattern;
 
 public class Vehicle {
 	private long id;
 	
-	@Pattern(regexp="^[0-9]{1,20}$")
+	@Min(0)
+        @Max(Integer.MAX_VALUE)
 	private int truckload;
 	
 	@Pattern(regexp="^[a-zA-Z-]{3,64}$")
@@ -39,7 +42,7 @@ public class Vehicle {
 		return colour;
 	}
 	
-	public String getRegNumber() {
+	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
 	
@@ -60,7 +63,7 @@ public class Vehicle {
 		this.colour = colour;
 	}
 	
-	public void setRegNumber(String regNumber){
+	public void setRegistrationNumber(String regNumber){
 		this.registrationNumber = regNumber;
 	}
 }
