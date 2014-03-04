@@ -39,7 +39,7 @@ public class Vehicle {
 		return colour;
 	}
 	
-	public String getRegNumber() {
+	public String getRegistrationNumber() {
 		return registrationNumber;
 	}
 	
@@ -60,7 +60,7 @@ public class Vehicle {
 		this.colour = colour;
 	}
 	
-	public void setRegNumber(String regNumber){
+	public void setRegistrationNumber(String regNumber){
 		this.registrationNumber = regNumber;
 	}
 }
