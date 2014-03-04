@@ -41,7 +41,7 @@ public class VehicleController {
 		Vehicle v = new Vehicle();
 		v.setBrand("MERCEDES");
 		v.setColour("GREEN");
-		v.setRegistrationNumber("KFD-212");
+		v.setRegNumber("KFD-212");
 		v.setTruckload(12000);
 		return vmgr.addVehicle(v);
 	}
