@@ -35,6 +35,13 @@ public class DriversController {
 		return dmgr.removeDriver(id);
 	}
 	
+	@RequestMapping(value="/drivers/{id}", method=RequestMethod.PUT)
+	public @ResponseBody Driver replaceDriver(
+				@PathVariable("id") Long id,
+				@RequestParam(required=true) String json){
+		return dmgr.replaceDriver(json, id);
+	}
+	
 	@RequestMapping(value="/drivers", method=RequestMethod.POST)
 	public @ResponseBody Driver addDriver(
 				@RequestParam(required=true) String json){
