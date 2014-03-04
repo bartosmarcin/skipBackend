@@ -30,12 +30,12 @@ public class DriversManager {
         validator = factory.getValidator();
 	}
 	
-	public Driver DriverFromJson(String json){
+	public Driver addDriver(String json){
 		ObjectMapper mapper = new ObjectMapper();
 		Driver d;
 		try {
 			d = mapper.readValue(json, Driver.class);
-			return d;
+			return this.addDriver(d);
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -49,13 +49,6 @@ public class DriversManager {
 		return null;
 	}
 	
-	public Driver addDriver(String json){
-		Driver d= this.DriverFromJson(json);
-		if( d == null)
-			return null;
-		return this.addDriver(d);
-	}
-	
 	public Driver addDriver(Driver d){
 		Set<ConstraintViolation<Driver>> 
 				errors = validator.validate(d);
@@ -64,25 +57,6 @@ public class DriversManager {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.save(d);
-		session.getTransaction().commit();
-		return d;
-	}
-	
-	public Driver replaceDriver(String json, long id){
-		Driver d = this.DriverFromJson(json);
-		if( d == null)
-			return null;
-		return this.replaceDriver(d, id);
-	}
-	
-	public Driver replaceDriver(Driver d, long id){
-		Set<ConstraintViolation<Driver>> 
-				errors = validator.validate(d);
-		if( errors.size() > 0 || d.getId() != id)
-			return null;
-		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		d = (Driver)session.merge(d);
 		session.getTransaction().commit();
 		return d;
 	}
