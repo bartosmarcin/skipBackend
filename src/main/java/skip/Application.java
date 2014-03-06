@@ -9,7 +9,7 @@ import org.springframework.context.annotation.ImportResource;
 @ComponentScan
 @EnableAutoConfiguration
 @Configuration
-//@ImportResource("classpath*:security/spring-security.xml")
+@ImportResource("classpath*:security/spring-security.xml")
 public class Application {
 
     public static void main(String[] args) {
