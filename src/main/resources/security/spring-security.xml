@@ -15,8 +15,9 @@
     <http auto-config="true">
         <intercept-url pattern="/**" requires-channel="https" />
         <intercept-url pattern="/welcome*" access="ROLE_ADMIN, ROLE_USER" />
-        <form-login username-parameter="login" password-parameter="password" default-target-url="/welcome"/>
-        <logout logout-success-url="/logout" />
+        <intercept-url pattern="/logout*" access="ROLE_ADMIN, ROLE_USER" />
+        <form-login username-parameter="username" password-parameter="password" default-target-url="/welcome"/>
+        <logout logout-success-url="/greeting" />
     </http>
     
     <!-- AUTHENTICATION -->
