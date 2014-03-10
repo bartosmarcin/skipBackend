@@ -28,7 +28,7 @@ public class DriverTest {
 		validDriver = new Driver();
 		validDriver.setFirstName("first-Name");
 		validDriver.setLastName("lastName");
-		validDriver.setLatestCoordinates("N12.1234567 W12.1234567");
+		validDriver.setLatestCoordinates(new Coordinates(20,30));
 		validDriver.setEmail("example@mail.com");
 		validDriver.setPhoneNumber("048123456789");
 		validDriver.setPhoneNumber("048123456789");
@@ -62,103 +62,11 @@ public class DriverTest {
 	}
 	
 	@Test
-	public void testCoordiantesWODot(){
-		validDriver.setLatestCoordinates("N001234567 W001234567");
+	public void testCoordiantesOutsideRange(){
+		validDriver.setLatestCoordinates(new Coordinates(200,200));
 		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(1, constraintViolations.size());
-
-	}
-
-
-	@Test
-	public void testCoordiantesWOSpace(){
-		validDriver.setLatestCoordinates("N00.1234567W00.1234567");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(1, constraintViolations.size());
-
-	}
-	
-	@Test
-	public void testNSCoordiantesOnly6FractionDigits(){
-		validDriver.setLatestCoordinates("N00.123456 W00.1234567");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(1, constraintViolations.size());
-
-	}
-	
-	@Test
-	public void testNSCoordiantesBiggerThan90Degrees(){
-		validDriver.setLatestCoordinates("N90.1234567 W00.1234567");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(1, constraintViolations.size());
-
-	}	
-	
-	@Test
-	public void testCoordiantesNSBiggerThan90Degrees2(){
-		validDriver.setLatestCoordinates("N91.0000000 W00.1234567");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(1, constraintViolations.size());
-
-	}
-
-	@Test
-	public void testValidNSCoordiantes90Degrees(){
-		validDriver.setLatestCoordinates("N90.0000000 W00.1234567");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(0, constraintViolations.size());
-
-	}
-	
-	@Test
-	public void testValidWECoordiantes180Degrees(){
-		validDriver.setLatestCoordinates("N01.0000000 W180.0000000");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(0, constraintViolations.size());
-
-	}
-
-	@Test
-	public void testWECoordiantesBiggerThan180Degrees(){
-		validDriver.setLatestCoordinates("N01.0000000 W181.1234567");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(1, constraintViolations.size());
-
-	}
-	
-	@Test
-	public void testWECoordiantesBiggerThan180Degrees2(){
-		validDriver.setLatestCoordinates("N01.0000000 W180.1234567");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(1, constraintViolations.size());
-
-	}
-	
-	@Test
-	public void testCoordinatesWithCommas(){
-		validDriver.setLatestCoordinates("N01,1234567 W01,1234567");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "latestCoordinates");
-		assertEquals(1, constraintViolations.size());
+				constraintViolations = validator.validate(validDriver);
+		assertNotEquals(0, constraintViolations.size());
 
 	}
 	

@@ -48,13 +48,13 @@ public class DriversController {
 		return dmgr.addDriver(json);
 	}
 	
-	@RequestMapping(value="/test_1")
-	public @ResponseBody Driver testValidation(){
+	@RequestMapping(value="/driver/newdummy")
+	public @ResponseBody Driver addDummyDriver(){
 		Driver d = new Driver();
 		d.setFirstName("FirstName");
 		d.setLastName("lastName");
 		d.setEmail("email@em.com");
-		d.setLatestCoordinates("N00.1234567 W87.1234567");
+		d.setLatestCoordinates(new Coordinates(0,0));
 		d.setPhoneNumber("123456789");
 		d.setPhoneNumber("123456789");
 		return dmgr.addDriver(d);

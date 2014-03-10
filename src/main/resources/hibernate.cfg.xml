@@ -21,6 +21,7 @@
     <property name="hbm2ddl.auto">update</property>
     <mapping resource="skip/Driver.hbm.xml"/>
     <mapping resource="skip/Vehicle.hbm.xml"/>
+    <mapping resource="skip/Coordinates.hbm.xml"/>
     <mapping resource="skip/User.hbm.xml"/>
     <mapping resource="skip/Authority.hbm.xml"/>
   </session-factory>

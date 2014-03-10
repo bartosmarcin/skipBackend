@@ -64,6 +64,7 @@ public class DriversManager {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		session.save(d);
+		session.save(d.getLatestCoordinates());
 		session.getTransaction().commit();
 		return d;
 	}
