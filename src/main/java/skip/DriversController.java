@@ -35,17 +35,24 @@ public class DriversController {
 		return dmgr.removeDriver(id);
 	}
 	
-	@RequestMapping(value="/drivers/{id}", method=RequestMethod.PUT)
+	@RequestMapping(value="/drivers/{id}", method=RequestMethod.POST)
 	public @ResponseBody Driver replaceDriver(
 				@PathVariable("id") Long id,
-				@RequestParam(required=true) String json){
-		return dmgr.replaceDriver(json, id);
+				@RequestParam(required=true) String driver){
+		return dmgr.replaceDriver(driver, id);
 	}
 	
 	@RequestMapping(value="/drivers", method=RequestMethod.POST)
 	public @ResponseBody Driver addDriver(
-				@RequestParam(required=true) String json){
-		return dmgr.addDriver(json);
+				@RequestParam(required=true) String driver){
+		return dmgr.addDriver(driver);
+	}
+	
+	@RequestMapping(value="/drivers/{id}/updateCoordinates", method=RequestMethod.POST)
+	public @ResponseBody Coordinates updateCoordinates(
+				@PathVariable("id") Long id,
+				@RequestParam(required=true) String coordinates){
+		return dmgr.updateDriverCoordinates(coordinates, id);
 	}
 	
 	@RequestMapping(value="/driver/newdummy")
