@@ -35,7 +35,7 @@ public class DriversController {
 		return dmgr.removeDriver(id);
 	}
 	
-	@RequestMapping(value="/drivers/{id}", method=RequestMethod.POST)
+	@RequestMapping(value="/drivers/{id}", method=RequestMethod.PUT)
 	public @ResponseBody Driver replaceDriver(
 				@PathVariable("id") Long id,
 				@RequestParam(required=true) String driver){
@@ -48,7 +48,7 @@ public class DriversController {
 		return dmgr.addDriver(driver);
 	}
 	
-	@RequestMapping(value="/drivers/{id}/updateCoordinates", method=RequestMethod.POST)
+	@RequestMapping(value="/drivers/{id}/updateCoordinates", method=RequestMethod.PUT)
 	public @ResponseBody Coordinates updateCoordinates(
 				@PathVariable("id") Long id,
 				@RequestParam(required=true) String coordinates){
