@@ -64,6 +64,25 @@ public class VehiclesManager {
 		session.getTransaction().commit();
 		return v;
 	}
+        
+        public Vehicle replaceVehicle(String json, long id){
+		Vehicle v = this.vehicleFromJson(json);
+		if( v == null)
+			return null;
+		return this.replaceVehicle(v, id);
+	}
+	
+	public Vehicle replaceVehicle(Vehicle v, long id){
+		Set<ConstraintViolation<Vehicle>> 
+				errors = validator.validate(v);
+		if( errors.size() > 0 || v.getId() != id)
+			return null;
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		session.beginTransaction();
+		v = (Vehicle)session.merge(v);
+		session.getTransaction().commit();
+		return v;
+	}
 
 	public Vehicle removeVehicle(long id) {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
