@@ -30,7 +30,7 @@ public class VehicleController {
 		return vmgr.removeVehicle(id);
 	}
         
-        @RequestMapping(value="/drivers/{id}", method=RequestMethod.PUT)
+        @RequestMapping(value="/vehicles/{id}", method=RequestMethod.PUT)
 	public @ResponseBody Vehicle replaceVehicle(
 				@PathVariable("id") Long id,
 				@RequestParam(required=true) String vehicle){

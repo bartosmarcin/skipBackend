@@ -8,7 +8,7 @@ public class Vehicle {
 	private long id;
 	
 	@Min(0)
-        @Max(Integer.MAX_VALUE)
+    @Max(Integer.MAX_VALUE)
 	private int truckload;
 	
 	@Pattern(regexp="^[a-zA-Z-]{3,64}$")
