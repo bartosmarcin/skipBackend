@@ -33,7 +33,7 @@ public class VehiclesManager {
 		Vehicle v;
 		try {
 			v = mapper.readValue(json, Vehicle.class);
-			return this.addVehicle(v);
+			return v;
 		} catch (JsonParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
