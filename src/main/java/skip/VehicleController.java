@@ -39,12 +39,12 @@ public class VehicleController {
 	
 	@RequestMapping(value="/vehicles", method=RequestMethod.POST)
 	public @ResponseBody Vehicle addVehicle(
-			@RequestParam(required=true) String json){
-		return vmgr.addVehicle(json);
+			@RequestParam(required=true) String vehicle){
+		return vmgr.addVehicle(vehicle);
 	}
 	
-	@RequestMapping(value="/test_2")
-	public @ResponseBody Vehicle testValidation(){
+	@RequestMapping(value="/vehicles/addRandomVehicle")
+	public @ResponseBody Vehicle addRandomVehicle(){
 		Vehicle v = new Vehicle();
                 v.setTruckload(10000);
                 v.setBrand("BMW");
