@@ -112,7 +112,8 @@ public class DriversManager {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		Driver d = (Driver) session.get(Driver.class, id);
-		session.delete(d);
+                if(d != null)
+                    session.delete(d);
 		session.getTransaction().commit();
 		return d;
 	}

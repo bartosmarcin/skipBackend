@@ -88,7 +88,8 @@ public class VehiclesManager {
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		session.beginTransaction();
 		Vehicle v = (Vehicle) session.get(Vehicle.class, id);
-		session.delete(v);
+                if(v != null)
+                    session.delete(v);
 		session.getTransaction().commit();
 		return v;
 	}
