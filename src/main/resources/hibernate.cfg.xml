@@ -4,9 +4,9 @@
   <session-factory>
     <!-- Database connection settings -->
     <property name="connection.driver_class">com.mysql.jdbc.Driver</property>
-    <property name="connection.url">jdbc:mysql://sql2.freemysqlhosting.net:3306/sql238044</property>
-    <property name="connection.username">sql238044</property>
-    <property name="connection.password">cM7%qA4%</property>
+    <property name="connection.url">jdbc:mysql://sql3.freemysqlhosting.net:3306/sql339479</property>
+    <property name="connection.username">sql339479</property>
+    <property name="connection.password">iU1*uR6%</property>
     <!-- JDBC connection pool (use the built-in) -->
     <property name="connection.pool_size">1</property>
     <!-- SQL dialect -->
