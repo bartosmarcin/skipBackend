@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans
+    xmlns="http://www.springframework.org/schema/security"
+    xmlns:beans="http://www.springframework.org/schema/beans"
+    xmlns:context="http://www.springframework.org/schema/context"
+    xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="
+        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd 
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd 
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+        http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
+    
+    <!-- URL SECURITY -->
+    <http auto-config="true">
+        <intercept-url pattern="/**" requires-channel="any" access="ROLE_ADMIN, ROLE_USER" />
+        <intercept-url pattern="/logout*" access="ROLE_ADMIN, ROLE_USER" />
+        <form-login username-parameter="username" password-parameter="password" default-target-url="/login" />
+        <logout logout-success-url="/logout" />
+    </http>
+    
+    <!-- AUTHENTICATION -->
+    <context:property-placeholder location="classpath*:security/security.properties" />
+        
+    <!-- (Requires the specified database to contain the standard Spring Security user data tables) -->
+    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="${database.driverClassName}" />
+	<beans:property name="url" value="${database.url}" />
+	<beans:property name="username" value="${database.username}" />
+	<beans:property name="password" value="${database.password}" />
+    </beans:bean>
+    
+    <!-- Initiallize the data source -->
+    <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL" enabled="${database.initialize}">
+        <jdbc:script location="classpath*:security/db-schema.sql" />
+        <jdbc:script location="classpath*:security/db-input.sql" />
+    </jdbc:initialize-database>
+    
+    <authentication-manager>
+        <authentication-provider>
+            <jdbc-user-service 
+                data-source-ref="dataSource"
+                users-by-username-query="${database.usersQuery}"
+                authorities-by-username-query="${database.authoritiesQuery}"
+            />
+        </authentication-provider>
+    </authentication-manager>
+
+</beans:beans>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="skip">
+	<class name='Driver' table='Drivers'>
+		<id name='id' column='DRIVER_ID'>
+			<generator class='native'/>
+		</id>
+		<property name='firstName'/>
+		<property name='lastName'/>
+		<property name='phoneNumber'/>
+		<property name='phoneNumber2'/>
+		<property name='email'/>
+		<one-to-one name='latestCoordinates' class='Coordinates'/>		
+		<property name='coordinatesUpdateDate' type='timestamp'/>
+	</class>
+</hibernate-mapping>
