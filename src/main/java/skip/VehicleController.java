@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class VehicleController {
 	VehiclesManager vmgr = new VehiclesManager();
 	
-	@RequestMapping(value="/vehicles/{id}")
+	@RequestMapping(value="/vehicles/{id}", method=RequestMethod.GET)
 	public @ResponseBody Vehicle getVehicle(
 			@PathVariable("id") Long id) {
 		return vmgr.getVehicleById(id);
@@ -30,7 +30,7 @@ public class VehicleController {
 		return vmgr.removeVehicle(id);
 	}
         
-        @RequestMapping(value="/vehicles/{id}", method=RequestMethod.PUT)
+        @RequestMapping(value="/vehicles/{id}", method=RequestMethod.POST)
 	public @ResponseBody Vehicle replaceVehicle(
 				@PathVariable("id") Long id,
 				@RequestParam(required=true) String vehicle){
