@@ -24,5 +24,6 @@
     <mapping resource="skip/Coordinates.hbm.xml"/>
     <mapping resource="skip/User.hbm.xml"/>
     <mapping resource="skip/Authority.hbm.xml"/>
+    <mapping resource="skip/Statement.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>

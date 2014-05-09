@@ -13,7 +13,7 @@
 		<property name='phoneNumber'/>
 		<property name='phoneNumber2'/>
 		<property name='email'/>
-		<one-to-one name='latestCoordinates' class='Coordinates'/>		
+		<many-to-one name='latestCoordinates' class='Coordinates' unique="true" cascade="all" lazy="false"/>		
 		<property name='coordinatesUpdateDate' type='timestamp'/>
 	</class>
 </hibernate-mapping>

@@ -43,7 +43,7 @@ public class VehicleController {
 		return vmgr.addVehicle(vehicle);
 	}
 	
-	@RequestMapping(value="/vehicles/addRandomVehicle")
+	@RequestMapping(value="/vehicles/add")
 	public @ResponseBody Vehicle addRandomVehicle(){
 		Vehicle v = new Vehicle();
                 v.setTruckload(10000);

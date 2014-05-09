@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="skip">
+	<class name='Statement' table='Statements'>
+		<id name='id' column='STATEMENT_ID'>
+			<generator class='native'/>
+		</id>
+		<property name='driverId'/>
+                <property name='date' type='timestamp'/>
+                <many-to-one name='coordinates' class='Coordinates' unique="true" cascade="all" lazy="false"/>	
+		<property name='state'/>
+	</class>
+</hibernate-mapping>
