@@ -1,4 +1,4 @@
-/*package skip;
+package skip;
 
 import java.io.FileNotFoundException;
 import org.apache.catalina.connector.Connector;
@@ -13,8 +13,8 @@ import org.springframework.util.ResourceUtils;
 @Configuration
 public class HttpsConfiguration {
 
-    // Enable HTTPS protocol for the embeded Tomcat server.
-    //final int serverPort = Integer.valueOf(System.getenv("PORT"));
+    /* Enable HTTPS protocol for the embeded Tomcat server. */
+    final int serverPort = 8443;
     final String serverProtocol = "HTTP/1.1";
     final String keystoreFile = "src/main/resources/security/SSL/skip.keystore";
     final String keystoreAlias = "skip";
@@ -34,7 +34,7 @@ public class HttpsConfiguration {
 
                         @Override
                         public void customize(Connector connector) {
-                            //connector.setPort(serverPort);
+                            connector.setPort(serverPort);
                             connector.setProtocol(serverProtocol);
                             connector.setSecure(true);
                             connector.setScheme("https");
@@ -58,4 +58,4 @@ public class HttpsConfiguration {
         };
     }
         
-}*/
+}

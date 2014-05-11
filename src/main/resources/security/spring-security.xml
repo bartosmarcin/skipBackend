@@ -13,10 +13,11 @@
     
     <!-- URL SECURITY -->
     <http auto-config="true">
-        <intercept-url pattern="/**" requires-channel="any" access="ROLE_ADMIN, ROLE_USER" />
+        <intercept-url pattern="/**" requires-channel="https" />
+        <intercept-url pattern="/welcome*" access="ROLE_ADMIN, ROLE_USER" />
         <intercept-url pattern="/logout*" access="ROLE_ADMIN, ROLE_USER" />
-        <form-login username-parameter="username" password-parameter="password"/>
-        <logout logout-success-url="/logout" />
+        <form-login username-parameter="username" password-parameter="password" default-target-url="/welcome"/>
+        <logout logout-success-url="/greeting" />
     </http>
     
     <!-- AUTHENTICATION -->
