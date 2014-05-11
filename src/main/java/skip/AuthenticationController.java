@@ -25,4 +25,9 @@ public class AuthenticationController {
         return String.format("Logged in, %s", principal.getName());
     }
     
+    @RequestMapping("/")
+    public @ResponseBody String root(Principal principal) {
+        return String.format("%s", principal.getName());
+    }
+    
 }
