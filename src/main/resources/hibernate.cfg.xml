@@ -5,7 +5,7 @@
     <!-- Database connection settings -->
 <<<<<<< HEAD
     <property name="connection.driver_class">org.postgresql.Driver</property>
-    <property name="connection.url">postgres://xvdmesyojaoijg:QPJVsPAPaVNMW6fQRxd8zRUdu6@ec2-79-125-21-70.eu-west-1.compute.amazonaws.com:5432/dcqpv3k3u7e5ul</property>
+    <property name="connection.url">jdbc:postgresql://xvdmesyojaoijg:QPJVsPAPaVNMW6fQRxd8zRUdu6@ec2-79-125-21-70.eu-west-1.compute.amazonaws.com:5432/dcqpv3k3u7e5ul</property>
     <property name="connection.username">xvdmesyojaoijg</property>
     <property name="connection.password">QPJVsPAPaVNMW6fQRxd8zRUdu6</property>
     <!-- JDBC connection pool (use the built-in) -->
