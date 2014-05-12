@@ -48,7 +48,7 @@ public class DriversController {
 		return dmgr.addDriver(driver);
 	}
 	
-	@RequestMapping(value="/drivers/{id}/updateCoordinates", method=RequestMethod.PUT)
+	@RequestMapping(value="/drivers/{id}/updateCoordinates", method=RequestMethod.POST)
 	public @ResponseBody Coordinates updateCoordinates(
 				@PathVariable("id") Long id,
 				@RequestParam(required=true) String coordinates){
