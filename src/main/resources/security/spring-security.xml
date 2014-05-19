@@ -13,24 +13,36 @@
     
     <!-- URL SECURITY -->
     <http auto-config="true">
-        <intercept-url pattern="/**" requires-channel="https" />
-        <intercept-url pattern="/welcome*" access="ROLE_ADMIN, ROLE_USER" />
-        <intercept-url pattern="/logout*" access="ROLE_ADMIN, ROLE_USER" />
-        <form-login username-parameter="username" password-parameter="password" default-target-url="/welcome"/>
-        <logout logout-success-url="/greeting" />
+	<intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	<intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	<intercept-url pattern="/logout*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <intercept-url pattern="/**" requires-channel="any" access="ROLE_ADMIN, ROLE_USER" />   
+        <form-login username-parameter="username" password-parameter="password" default-target-url="/login" />
+        <logout invalidate-session="true" logout-success-url="/logout" />
     </http>
     
     <!-- AUTHENTICATION -->
     <context:property-placeholder location="classpath*:security/security.properties" />
         
     <!-- (Requires the specified database to contain the standard Spring Security user data tables) -->
-    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <beans:property name="driverClassName" value="${database.driverClassName}" />
-	<beans:property name="url" value="${database.url}" />
-	<beans:property name="username" value="${database.username}" />
-	<beans:property name="password" value="${database.password}" />
+    <!--<beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">-->
+        <!--<beans:property name="driverClassName" value="${database.driverClassName}" />-->
+	<!--<beans:property name="url" value="${database.url}" />-->
+	<!--<beans:property name="username" value="${database.username}" />-->
+	<!--<beans:property name="password" value="${database.password}" />-->
+    <!--</beans:bean>-->
+
+    <beans:bean class="java.net.URI" id="dbUrl">
+        <beans:constructor-arg value="#{systemEnvironment['DATABASE_URL']}"/>
     </beans:bean>
     
+    <beans:bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
+        <beans:property name="driverClassName" value="org.postgresql.Driver" />
+	<beans:property name="url" value="#{ 'jdbc:postgresql://' + @dbUrl.getHost() + ':' + @dbUrl.getPort() + @dbUrl.getPath() }" />
+	<beans:property name="username" value="#{ @dbUrl.getUserInfo().split(':')[0] }" />
+	<beans:property name="password" value="#{ @dbUrl.getUserInfo().split(':')[1] }" />
+    </beans:bean>
+
     <!-- Initiallize the data source -->
     <jdbc:initialize-database data-source="dataSource" ignore-failures="ALL" enabled="${database.initialize}">
         <jdbc:script location="classpath*:security/db-schema.sql" />

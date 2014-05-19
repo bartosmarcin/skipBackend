@@ -35,7 +35,7 @@ public class UserController {
         return user;
     }
     
-    @RequestMapping(value="/users/{username}", method=RequestMethod.PUT)
+    @RequestMapping(value="/users/{username}", method=RequestMethod.POST)
     public @ResponseBody User replaceUser(
             @PathVariable("username") String username,
             @RequestParam(value="json", required=true, defaultValue="{}") String json) {

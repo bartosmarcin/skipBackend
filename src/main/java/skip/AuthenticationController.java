@@ -15,19 +15,25 @@ public class AuthenticationController {
 //        return "data: " + user + ", " + password;
 //    }
     
-    @RequestMapping("/logout")
-    public @ResponseBody String logout() {
-        return "Logged out";
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    public @ResponseBody String logout(Principal principal) {
+	if(principal == null || principal.getName() == null)
+		return "OK";
+	else
+	        return "NO";
     }
     
-    @RequestMapping("/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public @ResponseBody String welcome(Principal principal) {
-        return String.format("Logged in, %s", principal.getName());
+	if(principal == null || principal.getName() == null)
+		return "NO";
+	else
+	        return String.format("%s", principal.getName());
     }
     
-    @RequestMapping("/")
-    public @ResponseBody String root(Principal principal) {
-        return String.format("%s", principal.getName());
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public @ResponseBody String root() {
+        return String.format("SKIP");
     }
     
 }
