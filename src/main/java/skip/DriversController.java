@@ -55,7 +55,7 @@ public class DriversController {
 		return dmgr.updateDriverCoordinates(coordinates, id);
 	}
 	
-	@RequestMapping(value="/driver/newdummy")
+	@RequestMapping(value="/drivers/newdummy")
 	public @ResponseBody Driver addDummyDriver(){
 		Driver d = new Driver();
 		d.setFirstName("FirstName");

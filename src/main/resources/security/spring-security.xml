@@ -16,6 +16,7 @@
 	<intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	<intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	<intercept-url pattern="/logout*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+	<intercept-url pattern="/statements*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
         <intercept-url pattern="/**" requires-channel="any" access="ROLE_ADMIN, ROLE_USER" />   
         <form-login username-parameter="username" password-parameter="password" default-target-url="/login" />
         <logout invalidate-session="true" logout-success-url="/logout" />
