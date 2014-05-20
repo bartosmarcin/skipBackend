@@ -82,10 +82,15 @@ public class DriversManager {
 		if( errors.size() > 0)
 			return null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		session.save(d);
-		session.save(d.getLatestCoordinates());
-		session.getTransaction().commit();
+		try{
+			session.beginTransaction();
+			session.save(d);
+			session.save(d.getLatestCoordinates());
+			session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return null;
+		}
 		return d;
 	}
 	
@@ -102,19 +107,30 @@ public class DriversManager {
 		if( errors.size() > 0 || d.getId() != id)
 			return null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		d = (Driver)session.merge(d);
-		session.getTransaction().commit();
+		try{
+			session.beginTransaction();
+			d = (Driver)session.merge(d);
+			session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return null;
+		}
 		return d;
 	}
 	
 	public Driver removeDriver(long id){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		Driver d = (Driver) session.get(Driver.class, id);
-                if(d != null)
-                    session.delete(d);
-		session.getTransaction().commit();
+		Driver d = null;
+		try{
+			session.beginTransaction();
+			d = (Driver) session.get(Driver.class, id);
+            if(d != null)
+            	session.delete(d);
+            session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return null;
+		}
 		return d;
 	}
 	
@@ -140,21 +156,31 @@ public class DriversManager {
 		if( errors.size() > 0 )
 			return null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		Driver d = (Driver)session.get(Driver.class, driverId);
-		Hibernate.initialize(d);
-		coordinates.setId(d.getLatestCoordinates().getId());
-		coordinates = (Coordinates)session.merge(coordinates);
-		d.setCoordinatesUpdateDate(new Date());
-		session.getTransaction().commit();
+		try{
+			session.beginTransaction();
+			Driver d = (Driver)session.get(Driver.class, driverId);
+			Hibernate.initialize(d);
+			coordinates.setId(d.getLatestCoordinates().getId());
+			coordinates = (Coordinates)session.merge(coordinates);
+			d.setCoordinatesUpdateDate(new Date());
+			session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return null;
+		}
 		return coordinates;
 	}
 	
 	public List<Driver> getDriversList(){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		session.beginTransaction();
-		List<Driver> dlist = session.createCriteria(Driver.class).list();
-		session.getTransaction().commit();
+		List<Driver> dlist = null;
+		try{
+			session.beginTransaction();
+			dlist = session.createCriteria(Driver.class).list();
+			session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+		}
 		return dlist;		
 	}
 
