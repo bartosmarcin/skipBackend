@@ -184,4 +184,27 @@ public class DriversManager {
 		return dlist;		
 	}
 
+	public Vehicle assignVehicle(long driverId, long vehicleId){
+		VehiclesManager vmgr = new VehiclesManager();
+		Vehicle v = vmgr.getVehicleById(vehicleId);
+		if(v==null)
+			return null;
+		return assignVehicle(driverId, v);		
+	}
+	
+	public Vehicle assignVehicle(long driverId, Vehicle v){
+		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
+		Driver d = getDriverById(driverId);
+		try{
+			session.beginTransaction();
+			d.setAssignedVehicle(v);
+			session.merge(d);
+			session.getTransaction().commit();
+		}catch(Exception e){
+			session.getTransaction().rollback();
+			return null;
+		}
+		return v;
+	}
+
 }

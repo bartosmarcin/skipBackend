@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
+import org.hibernate.dialect.PostgreSQLDialect;;;
 @Controller
 public class DriversController {
 	DriversManager dmgr = new DriversManager();
@@ -53,9 +53,25 @@ public class DriversController {
 				@PathVariable("id") Long id,
 				@RequestParam(required=true) String coordinates){
 		return dmgr.updateDriverCoordinates(coordinates, id);
+	}	
+	
+	@RequestMapping(value="/drivers/{id}/assignVehicle", method=RequestMethod.POST)
+	public @ResponseBody Vehicle assignVehicle(
+				@PathVariable("id") Long id,
+				@RequestParam(required=true) long vehicleId){
+		return dmgr.assignVehicle(id, vehicleId);
 	}
 	
-	@RequestMapping(value="/drivers/newdummy")
+	@RequestMapping(value="/drivers/{id}/assignedVehicle", method=RequestMethod.GET)
+	public @ResponseBody Vehicle getAssignedVehicle(
+				@PathVariable("id") Long id){
+		Driver d = dmgr.getDriverById(id);
+		if(d != null)
+			return d.getAssignedVehicle();
+		return null;
+	}
+	
+	@RequestMapping(value="/driver/newdummy")
 	public @ResponseBody Driver addDummyDriver(){
 		Driver d = new Driver();
 		d.setFirstName("FirstName");
