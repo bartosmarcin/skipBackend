@@ -3,7 +3,6 @@ package skip;
 import java.util.Date;
 
 import javax.validation.Valid;
-import javax.validation.constraints.Digits;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import org.hibernate.validator.constraints.Email;
@@ -18,6 +17,8 @@ public class Driver {
 	@Valid
 	private Coordinates latestCoordinates;
 	
+	private Vehicle assignedVehicle;
+
 	@Pattern(regexp="\\d{3,12}")
 	private String phoneNumber, phoneNumber2;
 	
@@ -41,6 +42,14 @@ public class Driver {
 	
 	public long getId(){
 		return this.id;
+	}
+	
+	public Vehicle getAssignedVehicle() {
+		return assignedVehicle;
+	}
+
+	public void setAssignedVehicle(Vehicle assignedVehicle) {
+		this.assignedVehicle = assignedVehicle;
 	}
 	
 	public void setFirstName(String firstName){
