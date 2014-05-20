@@ -9,6 +9,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Driver {
 	private long id;
 	
@@ -20,6 +22,7 @@ public class Driver {
 	@Valid
 	private Coordinates latestCoordinates;
 	
+	@JsonIgnore
 	private Vehicle assignedVehicle;
 
 	@Pattern(regexp="\\d{3,12}")
