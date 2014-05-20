@@ -3,8 +3,10 @@ package skip;
 import java.util.Date;
 
 import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 import org.hibernate.validator.constraints.Email;
 
 public class Driver {
@@ -12,6 +14,7 @@ public class Driver {
 	
 	@Size(min=3, max=64)
 	@Pattern(regexp="^[a-zA-Z-]*$")
+	@NotNull
 	private String firstName, lastName;
 	
 	@Valid
@@ -20,10 +23,15 @@ public class Driver {
 	private Vehicle assignedVehicle;
 
 	@Pattern(regexp="\\d{3,12}")
-	private String phoneNumber, phoneNumber2;
+	@NotNull
+	private String phoneNumber; 
+	
+	@Pattern(regexp="\\d{3,12}|null")
+	private String phoneNumber2;
 	
 	@Email
 	@Size(max=64)
+	@NotNull
 	private String email;
 	
 	private Date coordinatesUpdateDate;

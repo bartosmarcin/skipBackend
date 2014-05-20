@@ -108,4 +108,22 @@ public class DriverTest {
 						validDriver, "email");
 		assertEquals(0, constraintViolations.size());
 	}
+
+	@Test
+	public void testPhoneNumber2Null(){
+		validDriver.setPhoneNumber2(null);
+		Set<ConstraintViolation<Driver>> 
+		constraintViolations = validator.validateProperty(
+				validDriver, "phoneNumber2");
+		assertEquals(0, constraintViolations.size());
+	}
+	
+	@Test
+	public void testPhoneNumberNull(){
+		validDriver.setPhoneNumber(null);
+		Set<ConstraintViolation<Driver>> 
+		constraintViolations = validator.validateProperty(
+				validDriver, "phoneNumber");
+		assertEquals(1, constraintViolations.size());
+	}
 }
