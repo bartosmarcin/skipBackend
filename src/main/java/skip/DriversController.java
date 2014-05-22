@@ -56,10 +56,10 @@ public class DriversController {
 	}	
 	
 	@RequestMapping(value="/drivers/{id}/assignVehicle", method=RequestMethod.POST)
-	public @ResponseBody Vehicle assignVehicle(
+	public @ResponseBody long assignVehicle(
 				@PathVariable("id") Long id,
-				@RequestParam(required=true) long vehicleId){
-		return dmgr.assignVehicle(id, vehicleId);
+				@RequestParam(required=false) long vehicleId){		
+		return vehicleId;
 	}
 	
 	@RequestMapping(value="/drivers/{id}/assignedVehicle", method=RequestMethod.GET)
