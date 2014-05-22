@@ -58,7 +58,8 @@ public class DriversController {
 	@RequestMapping(value="/drivers/{id}/assignVehicle", method=RequestMethod.POST)
 	public @ResponseBody long assignVehicle(
 				@PathVariable("id") Long id,
-				@RequestParam(required=false) long vehicleId){		
+				@RequestParam(required=false) long vehicleId){
+		
 		return vehicleId;
 	}
 	
