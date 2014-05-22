@@ -197,13 +197,13 @@ public class DriversManager {
 	public Vehicle assignVehicle(long driverId, Long vehicleId){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
+			System.out.println(vehicleId);
 			session.beginTransaction();
 			Driver d = (Driver)session.get(Driver.class, driverId);
 			Hibernate.initialize(d);
 			Vehicle v = null;
 			if(vehicleId != null)
 				v = (Vehicle)session.get(Vehicle.class, vehicleId);
-			
 			d.setAssignedVehicle(v);
 			session.merge(d);
 			session.getTransaction().commit();
