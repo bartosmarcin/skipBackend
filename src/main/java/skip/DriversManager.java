@@ -184,27 +184,30 @@ public class DriversManager {
 		return dlist;		
 	}
 
-	public Vehicle assignVehicle(long driverId, long vehicleId){
-		VehiclesManager vmgr = new VehiclesManager();
-		Vehicle v = vmgr.getVehicleById(vehicleId);
-		if(v==null)
-			return null;
-		return assignVehicle(driverId, v);		
-	}
+//	public Vehicle assignVehicle(long driverId, long vehicleId){
+//		VehiclesManager vmgr = new VehiclesManager();
+//		Vehicle v = vmgr.getVehicleById(vehicleId);
+//		if(v==null)
+//			return null;
+//		return assignVehicle(driverId, v);		
+//	}
 	
-	public Vehicle assignVehicle(long driverId, Vehicle v){
+	public Vehicle assignVehicle(long driverId, Long vehicleId){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-		Driver d = getDriverById(driverId);
 		try{
 			session.beginTransaction();
+			Driver d = (Driver)session.get(Driver.class, driverId);
+			Vehicle v = null;
+			if(vehicleId != null)
+				v = (Vehicle)session.get(Vehicle.class, vehicleId);
 			d.setAssignedVehicle(v);
 			session.merge(d);
 			session.getTransaction().commit();
+			return v;
 		}catch(Exception e){
 			session.getTransaction().rollback();
 			return null;
 		}
-		return v;
 	}
 
 }
