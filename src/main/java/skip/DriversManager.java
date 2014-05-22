@@ -14,6 +14,8 @@ import javax.validation.ValidatorFactory;
 import org.hibernate.Hibernate;
 import org.hibernate.Session;
 
+import ch.qos.logback.classic.Logger;
+
 import com.fasterxml.jackson.core.JsonParseException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -197,15 +199,19 @@ public class DriversManager {
 		try{
 			session.beginTransaction();
 			Driver d = (Driver)session.get(Driver.class, driverId);
+			Hibernate.initialize(d);
 			Vehicle v = null;
 			if(vehicleId != null)
 				v = (Vehicle)session.get(Vehicle.class, vehicleId);
+			
 			d.setAssignedVehicle(v);
 			session.merge(d);
 			session.getTransaction().commit();
 			return v;
 		}catch(Exception e){
 			session.getTransaction().rollback();
+			System.out.println(e.getMessage());
+			System.out.println("Exception during assignVehicle transaction");
 			return null;
 		}
 	}
