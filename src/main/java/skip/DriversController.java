@@ -2,17 +2,13 @@ package skip;
 
 import java.util.List;
 
-import javax.validation.Validation;
-import javax.validation.Validator;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.hibernate.dialect.PostgreSQLDialect;;;
+
 @Controller
 public class DriversController {
 	DriversManager dmgr = new DriversManager();
@@ -58,7 +54,7 @@ public class DriversController {
 	@RequestMapping(value="/drivers/{id}/assignVehicle", method=RequestMethod.POST)
 	public @ResponseBody long assignVehicle(
 				@PathVariable("id") Long id,
-				@RequestParam(required=false) long vehicleId){
+				@RequestParam(required=false) Long vehicleId){
 		
 		return vehicleId;
 	}
