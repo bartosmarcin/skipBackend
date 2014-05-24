@@ -15,21 +15,21 @@ public class AuthenticationController {
 //        return "data: " + user + ", " + password;
 //    }
     
-    @RequestMapping(value = "/logout", method = RequestMethod.GET)
-    public @ResponseBody String logout(Principal principal) {
-	if(principal == null || principal.getName() == null)
-		return "OK";
-	else
-	        return "NO";
-    }
+//    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+//    public @ResponseBody String logout(Principal principal) {
+//	if(principal == null || principal.getName() == null)
+//		return "OK";
+//	else
+//	        return "NO";
+//    }
     
-    @RequestMapping(value = "/login", method = RequestMethod.GET)
-    public @ResponseBody String welcome(Principal principal) {
-	if(principal == null || principal.getName() == null)
-		return "NO";
-	else
-	        return String.format("%s", principal.getName());
-    }
+//    @RequestMapping(value = "/login", method = RequestMethod.GET)
+//    public @ResponseBody String welcome(Principal principal) {
+//	if(principal == null || principal.getName() == null)
+//		return "NO";
+//	else
+//	        return String.format("%s", principal.getName());
+//    }
     
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public @ResponseBody String root() {

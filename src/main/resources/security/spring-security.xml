@@ -12,16 +12,26 @@
         http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd">
     
     <!-- URL SECURITY -->
-    <http auto-config="true">
+    <http auto-config="false" entry-point-ref="defaultAuthenticationEntryPoint">
 	<intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	<intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	<intercept-url pattern="/logout*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
 	<intercept-url pattern="/statements*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-        <intercept-url pattern="/**" requires-channel="any" access="ROLE_ADMIN, ROLE_USER" />   
-        <form-login username-parameter="username" password-parameter="password" default-target-url="/login" />
-        <logout invalidate-session="true" logout-success-url="/logout" />
+        <intercept-url pattern="/**" requires-channel="any" access="ROLE_MASTER, ROLE_ADMIN, ROLE_USER" />   
+        <form-login
+            login-processing-url="/login"
+            username-parameter="username"
+            password-parameter="password"
+            authentication-success-handler-ref="defaultAuthenticationSuccessHandler"
+            authentication-failure-handler-ref="defaultAuthenticationFailureHandler"
+        />
+        <logout invalidate-session="true" logout-url="/logout" />
     </http>
     
+    <beans:bean id="defaultAuthenticationEntryPoint" class="skip.DefaultAuthenticationEntryPoint" />
+    <beans:bean id="defaultAuthenticationSuccessHandler" class="skip.DefaultAuthenticationSuccessHandler" />
+    <beans:bean id="defaultAuthenticationFailureHandler" class="skip.DefaultAuthenticationFailureHandler" />
+
     <!-- AUTHENTICATION -->
     <context:property-placeholder location="classpath*:security/security.properties" />
         
