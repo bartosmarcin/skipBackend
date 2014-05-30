@@ -73,7 +73,6 @@ public class DriversController {
 		d.setFirstName("FirstName");
 		d.setLastName("lastName");
 		d.setEmail("email@em.com");
-		d.setLatestCoordinates(new Coordinates(0,0));
 		d.setPhoneNumber("123456789");
 		d.setPhoneNumber("123456789");
 		return dmgr.addDriver(d);

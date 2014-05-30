@@ -161,8 +161,7 @@ public class DriversManager {
 			session.beginTransaction();
 			Driver d = (Driver)session.get(Driver.class, driverId);
 			Hibernate.initialize(d);
-			coordinates.setId(d.getLatestCoordinates().getId());
-			coordinates = (Coordinates)session.merge(coordinates);
+			d.getLatestCoordinates().add(coordinates);
 			d.setCoordinatesUpdateDate(new Date());
 			session.getTransaction().commit();
 		}catch(Exception e){

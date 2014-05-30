@@ -2,6 +2,7 @@ package skip;
 
 import static org.junit.Assert.*;
 
+import java.util.ArrayList;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -28,7 +29,6 @@ public class DriverTest {
 		validDriver = new Driver();
 		validDriver.setFirstName("first-Name");
 		validDriver.setLastName("lastName");
-		validDriver.setLatestCoordinates(new Coordinates(20,30));
 		validDriver.setEmail("example@mail.com");
 		validDriver.setPhoneNumber("048123456789");
 		validDriver.setPhoneNumber("048123456789");

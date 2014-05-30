@@ -1,6 +1,7 @@
 package skip;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -20,7 +21,7 @@ public class Driver {
 	private String firstName, lastName;
 	
 	@Valid
-	private Coordinates latestCoordinates;
+	private List<Coordinates> latestCoordinates;
 	
 	@JsonIgnore
 	private Vehicle assignedVehicle;
@@ -79,11 +80,11 @@ public class Driver {
 		return this.lastName;
 	}
 	
-	public void setLatestCoordinates(Coordinates coordinates){
+	public void setLatestCoordinates(List<Coordinates> coordinates){
 		this.latestCoordinates = coordinates;
 	}
 	
-	public Coordinates getLatestCoordinates(){
+	public List<Coordinates> getLatestCoordinates(){
 		return this.latestCoordinates;
 	}
 	
