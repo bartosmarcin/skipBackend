@@ -60,25 +60,17 @@ public class DriverTest {
 		assertEquals(0, constraintViolations.size());
 
 	}
-	
-	@Test
-	public void testCoordiantesOutsideRange(){
-		validDriver.setLatestCoordinates(new Coordinates(200,200));
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validate(validDriver);
-		assertNotEquals(0, constraintViolations.size());
-
-	}
-	
-	@Test
-	public void testEmailWOat(){
-		validDriver.setEmail("someemail.com");
-		Set<ConstraintViolation<Driver>> 
-				constraintViolations = validator.validateProperty(
-						validDriver, "email");
-		assertEquals(1, constraintViolations.size());
-
-	}
+//	
+//
+//	@Test
+//	public void testEmailWOat(){
+//		validDriver.setEmail("someemail.com");
+//		Set<ConstraintViolation<Driver>> 
+//				constraintViolations = validator.validateProperty(
+//						validDriver, "email");
+//		assertEquals(1, constraintViolations.size());
+//
+//	}
 	
 	@Test
 	public void testEmailWithPlus(){
