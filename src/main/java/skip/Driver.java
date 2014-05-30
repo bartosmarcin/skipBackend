@@ -2,6 +2,7 @@ package skip;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
@@ -21,7 +22,7 @@ public class Driver {
 	private String firstName, lastName;
 	
 	@Valid
-	private List<Coordinates> latestCoordinates;
+	private Set<Coordinates> latestCoordinates;
 	
 	@JsonIgnore
 	private Vehicle assignedVehicle;
@@ -80,11 +81,15 @@ public class Driver {
 		return this.lastName;
 	}
 	
-	public void setLatestCoordinates(List<Coordinates> coordinates){
+	public void setLatestCoordinates(Set<Coordinates> coordinates){
 		this.latestCoordinates = coordinates;
 	}
 	
-	public List<Coordinates> getLatestCoordinates(){
+	public void addCoordinates(Coordinates c){
+		this.latestCoordinates.add(c);
+	}
+	
+	public Set<Coordinates> getLatestCoordinates(){
 		return this.latestCoordinates;
 	}
 	
