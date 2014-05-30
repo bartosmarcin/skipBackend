@@ -13,7 +13,7 @@
 		<property name='phoneNumber'/>
 		<property name='phoneNumber2'/>
 		<property name='email'/>
-		<set name='latestCoordinates'>
+		<set name='latestCoordinates' cascade="all" lazy="false">
 			<key column='DRIVER_ID'/>
 			<many-to-many  class='Coordinates' />	
 		</set>	
