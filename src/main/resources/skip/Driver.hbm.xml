@@ -14,6 +14,7 @@
 		<property name='phoneNumber2'/>
 		<property name='email'/>
 		<set name='latestCoordinates'>
+			<key column='DRIVER_ID'/>
 			<many-to-many  class='Coordinates' />	
 		</set>	
 		<many-to-one name='assignedVehicle' class='Vehicle' unique="true" lazy="false"/>		
