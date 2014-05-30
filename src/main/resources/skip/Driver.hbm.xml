@@ -13,7 +13,9 @@
 		<property name='phoneNumber'/>
 		<property name='phoneNumber2'/>
 		<property name='email'/>
-		<set name='latestCoordinates' table="DRI_COO" many-to-many='Coordinates'/>
+		<set name='latestCoordinates'>
+			<many-to-many  class='Coordinates' />	
+		</set>	
 		<many-to-one name='assignedVehicle' class='Vehicle' unique="true" lazy="false"/>		
 		<property name='coordinatesUpdateDate' type='timestamp'/>
 	</class>
