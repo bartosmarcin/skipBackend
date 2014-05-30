@@ -81,8 +81,8 @@ public class DriversManager {
 	public Driver addDriver(Driver d){
 		Set<ConstraintViolation<Driver>> 
 				errors = validator.validate(d);
-//		if( errors.size() > 0)
-//			return null;
+		if( errors.size() > 0)
+			return null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
@@ -185,14 +185,6 @@ public class DriversManager {
 		return dlist;		
 	}
 
-//	public Vehicle assignVehicle(long driverId, long vehicleId){
-//		VehiclesManager vmgr = new VehiclesManager();
-//		Vehicle v = vmgr.getVehicleById(vehicleId);
-//		if(v==null)
-//			return null;
-//		return assignVehicle(driverId, v);		
-//	}
-	
 	public Vehicle assignVehicle(long driverId, Long vehicleId){
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
