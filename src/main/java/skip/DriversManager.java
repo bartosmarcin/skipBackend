@@ -81,13 +81,12 @@ public class DriversManager {
 	public Driver addDriver(Driver d){
 		Set<ConstraintViolation<Driver>> 
 				errors = validator.validate(d);
-		if( errors.size() > 0)
-			return null;
+//		if( errors.size() > 0)
+//			return null;
 		Session session = HibernateUtil.getSessionFactory().getCurrentSession();
 		try{
 			session.beginTransaction();
 			session.save(d);
-			session.save(d.getLatestCoordinates());
 			session.getTransaction().commit();
 		}catch(Exception e){
 			session.getTransaction().rollback();
