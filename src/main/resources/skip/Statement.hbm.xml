@@ -10,7 +10,7 @@
 		</id>
 		<property name='driverId'/>
                 <property name='date' type='timestamp'/>
-                <many-to-one name='coordinates' class='Coordinates' unique="true" cascade="all" lazy="false"/>	
+                <many-to-one name='coordinates' class='Coordinates' cascade="all" lazy="false"/>	
 		<property name='state'/>
 	</class>
 </hibernate-mapping>

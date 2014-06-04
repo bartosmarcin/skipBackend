@@ -13,7 +13,7 @@
 		<property name='phoneNumber'/>
 		<property name='phoneNumber2'/>
 		<property name='email'/>
-		<many-to-one name='latestCoordinates' class='Coordinates' unique="true" cascade="all" lazy="false"/>		
+		<many-to-one name='latestCoordinates' class='Coordinates' cascade="all" lazy="false"/>		
 		<many-to-one name='assignedVehicle' class='Vehicle' unique="true" cascade="all" lazy="false"/>		
 		<property name='coordinatesUpdateDate' type='timestamp'/>
 	</class>

@@ -56,37 +56,58 @@ public class StatementsManager {
             return null;
         }
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        session.save(s);
-        session.save(s.getcoordinates());
-        session.getTransaction().commit();
+        try {
+            session.beginTransaction();
+            session.save(s);
+            session.save(s.getcoordinates());
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            return null;
+        }
         return s;
     }
 
     public Statement removeStatement(long id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        Statement s = (Statement) session.get(Statement.class, id);
-        if(s != null)
-            session.delete(s);
-        session.getTransaction().commit();
+        Statement s = null;
+        try {
+            session.beginTransaction();
+            s = (Statement) session.get(Statement.class, id);
+            if (s != null) {
+                session.delete(s);
+            }
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+        }
         return s;
     }
 
     public Statement getStatementById(long id) {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        Statement s = (Statement) session.get(Statement.class, id);
-        Hibernate.initialize(s);
-        session.getTransaction().commit();
+        Statement s = null;
+        try {
+            session.beginTransaction();
+            s = (Statement) session.get(Statement.class, id);
+            Hibernate.initialize(s);
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+        }
         return s;
     }
 
     public List<Statement> getStatementsList() {
         Session session = HibernateUtil.getSessionFactory().getCurrentSession();
-        session.beginTransaction();
-        List<Statement> slist = session.createCriteria(Statement.class).list();
-        session.getTransaction().commit();
+        List<Statement> slist = null;
+        try {
+            session.beginTransaction();
+            slist = session.createCriteria(Statement.class).list();
+            session.getTransaction().commit();
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+        }
         return slist;
     }
 
