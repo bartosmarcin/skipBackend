@@ -1,7 +1,7 @@
 package skip;
 
 import java.util.List;
-
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -67,6 +67,7 @@ public class DriversController {
 		return null;
 	}
 	
+        @Secured("ROLE_ADMIN")
 	@RequestMapping(value="/driver/newdummy")
 	public @ResponseBody Driver addDummyDriver(){
 		Driver d = new Driver();

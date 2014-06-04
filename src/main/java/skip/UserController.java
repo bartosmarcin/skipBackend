@@ -16,7 +16,7 @@ public class UserController {
     AuthorityManager amgr = new AuthorityManager();
     DriversManager dmgr = new DriversManager();
     
-    @RequestMapping(value="/users/{username}")
+    @RequestMapping(value="/users/{username}", method=RequestMethod.GET)
     public @ResponseBody Account getAccout(@PathVariable("username") String username) {
         // Get Authority by username.
         Authority authority = amgr.getAuthorityByUsername(username);
@@ -99,13 +99,17 @@ public class UserController {
         // Remove Account if the user's authority is ADMIN.
         if(authority != null) {
             if((AuthorityManager.USER).equals(authority.getAuthority())) {
-                Account account = umgr.removeAccount(username);
-                if(account != null) {
-                    amgr.removeAuthority(username);
-                    dmgr.removeDriver(account.getEntity());
-                }
+                authority = amgr.removeAuthority(username);
                 
-                return account;
+                if(authority != null) {
+                    Account account = umgr.removeAccount(username);
+                    
+                    if(account != null) {
+                        dmgr.removeDriver(account.getEntity());
+                    }
+                    
+                    return account;
+                }
             }
         }
         

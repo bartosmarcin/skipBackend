@@ -14,23 +14,43 @@
     <!-- URL SECURITY -->
     <http auto-config="false" entry-point-ref="defaultAuthenticationEntryPoint">
 	<intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-	<intercept-url pattern="/login*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-	<intercept-url pattern="/logout*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
-	<intercept-url pattern="/statements*" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        
+	<intercept-url pattern="/login*" method="POST" access="IS_AUTHENTICATED_ANONYMOUSLY" />
+        <intercept-url pattern="/logout*" method="GET" access="ROLE_MASTER, ROLE_ADMIN, ROLE_USER" />
+        
+        <intercept-url pattern="/admins*" access="ROLE_MASTER" />
+        <intercept-url pattern="/users*" access="ROLE_MASTER, ROLE_ADMIN" />
+        
+        <intercept-url pattern="/drivers" method="GET" access="ROLE_MASTER, ROLE_ADMIN" />
+        <intercept-url pattern="/drivers/*/updateCoordinates" method="POST" access="ROLE_USER" />
+        <intercept-url pattern="/drivers/*/assignVehicle" method="POST" access="ROLE_MASTER, ROLE_ADMIN" />
+        <intercept-url pattern="/drivers/*/assignedVehicle" method="GET" access="ROLE_MASTER, ROLE_ADMIN, ROLE_USER" />
+        <intercept-url pattern="/drivers/*" method="GET" access="ROLE_MASTER, ROLE_ADMIN, ROLE_USER" />
+        <intercept-url pattern="/drivers/*" method="POST" access="ROLE_MASTER, ROLE_ADMIN" />
+        
+        <intercept-url pattern="/vehicles*" access="ROLE_MASTER, ROLE_ADMIN" />
+                
+        <intercept-url pattern="/statements" method="POST" access="ROLE_USER" />
+        <intercept-url pattern="/statements*" method="GET" access="ROLE_MASTER, ROLE_ADMIN" />
+        
         <intercept-url pattern="/**" requires-channel="any" access="ROLE_MASTER, ROLE_ADMIN, ROLE_USER" />   
         <form-login
             login-processing-url="/login"
             username-parameter="username"
             password-parameter="password"
-            authentication-success-handler-ref="defaultAuthenticationSuccessHandler"
-            authentication-failure-handler-ref="defaultAuthenticationFailureHandler"
+            authentication-success-handler-ref="defaultAuthenticationLoginSuccessHandler"
+            authentication-failure-handler-ref="defaultAuthenticationLoginFailureHandler"
         />
-        <logout invalidate-session="true" logout-url="/logout" />
+        <logout
+            logout-url="/logout"
+            invalidate-session="true"
+            success-handler-ref="defaultAuthenticationLogoutSuccessHandler" />
     </http>
     
     <beans:bean id="defaultAuthenticationEntryPoint" class="skip.DefaultAuthenticationEntryPoint" />
-    <beans:bean id="defaultAuthenticationSuccessHandler" class="skip.DefaultAuthenticationSuccessHandler" />
-    <beans:bean id="defaultAuthenticationFailureHandler" class="skip.DefaultAuthenticationFailureHandler" />
+    <beans:bean id="defaultAuthenticationLoginSuccessHandler" class="skip.DefaultAuthenticationLoginSuccessHandler" />
+    <beans:bean id="defaultAuthenticationLoginFailureHandler" class="skip.DefaultAuthenticationLoginFailureHandler" />
+    <beans:bean id="defaultAuthenticationLogoutSuccessHandler" class="skip.DefaultAuthenticationLogoutSuccessHandler" />
 
     <!-- AUTHENTICATION -->
     <context:property-placeholder location="classpath*:security/security.properties" />

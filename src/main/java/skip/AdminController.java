@@ -2,6 +2,7 @@ package skip;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -15,7 +16,7 @@ public class AdminController {
     AccountManager umgr = new AccountManager();
     AuthorityManager amgr = new AuthorityManager();
     
-    @RequestMapping(value="/admins/{username}")
+    @RequestMapping(value="/admins/{username}", method=RequestMethod.GET)
     public @ResponseBody Account getAccout(@PathVariable("username") String username) {
         // Get Authority by username.
         Authority authority = amgr.getAuthorityByUsername(username);
@@ -72,12 +73,18 @@ public class AdminController {
         // Remove Account if the user's authority is ADMIN.
         if(authority != null) {
             if((AuthorityManager.ADMIN).equals(authority.getAuthority())) {
-                Account account = umgr.removeAccount(username);
-                if(account != null) {
-                    amgr.removeAuthority(username);
+                try {
+                    authority = amgr.removeAuthority(username);
+                    
+                    if(authority != null) {
+                        Account account = umgr.removeAccount(username);
+                        
+                        return account;
+                    }                            
                 }
-                
-                return account;
+                catch(ConstraintViolationException exception) {
+                    return null;
+                }
             }
         }
         
