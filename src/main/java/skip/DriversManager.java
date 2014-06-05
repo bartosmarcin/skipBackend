@@ -84,7 +84,6 @@ public class DriversManager {
 		try {
 			session.beginTransaction();
 			session.save(d);
-			session.save(d.getLatestCoordinates());
 			session.getTransaction().commit();
 		} catch (Exception e) {
 			session.getTransaction().rollback();
