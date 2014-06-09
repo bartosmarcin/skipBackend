@@ -15,7 +15,7 @@ public class Driver {
 	private long id;
 	
 	@Size(min=3, max=64)
-	@Pattern(regexp="^[a-zA-Z-]*$")
+	@Pattern(regexp="^[\\p{L}]*$")
 	@NotNull
 	private String firstName, lastName;
 	
