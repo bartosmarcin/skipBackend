@@ -67,7 +67,7 @@ public class DriversController {
 		return null;
 	}
 	
-        @Secured("ROLE_ADMIN")
+        @Secured("ROLE_MASTER, ROLE_ADMIN")
 	@RequestMapping(value="/driver/newdummy")
 	public @ResponseBody Driver addDummyDriver(){
 		Driver d = new Driver();

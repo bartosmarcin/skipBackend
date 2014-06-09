@@ -2,12 +2,15 @@ package skip;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.hibernate.Query;
+import org.hibernate.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import util.HibernateUtil;
 
 @Controller
 public class UserController {
@@ -21,7 +24,7 @@ public class UserController {
         // Get Authority by username.
         Authority authority = amgr.getAuthorityByUsername(username);
         
-        // Return Account if the user's authority is ADMIN.
+        // Return Account if the user's authority is USER.
         if(authority != null) {
             if((AuthorityManager.USER).equals(authority.getAuthority())) {
                 return umgr.getAccountByUsername(username);
@@ -31,6 +34,29 @@ public class UserController {
         return null;
     }
 	
+    @RequestMapping(value="/users/driver/{id}", method=RequestMethod.GET)
+    public @ResponseBody Account getAccoutByDriverId(@PathVariable("id") String id) {
+        
+        List<Account> users = umgr.getAccountsList();
+        for(Account user : users) {
+            if(id.equals(String.valueOf(user.getEntity()))) {
+                String username = user.getUsername();
+                
+                // Get Authority by username.
+                Authority authority = amgr.getAuthorityByUsername(username);
+        
+                // Return Account if the user's authority is USER.
+                if(authority != null) {
+                    if((AuthorityManager.USER).equals(authority.getAuthority())) {
+                        return umgr.getAccountByUsername(username);
+                    }
+                }
+            }
+        }
+        
+        return null;
+    }
+    
     @RequestMapping(value="/users", method=RequestMethod.GET)
     public @ResponseBody List<Account> getAccouts() {
         // Create an empty list.
@@ -96,7 +122,7 @@ public class UserController {
         // Get Authority by username.
         Authority authority = amgr.getAuthorityByUsername(username);
         
-        // Remove Account if the user's authority is ADMIN.
+        // Remove Account if the user's authority is USER.
         if(authority != null) {
             if((AuthorityManager.USER).equals(authority.getAuthority())) {
                 authority = amgr.removeAuthority(username);
