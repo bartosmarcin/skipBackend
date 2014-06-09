@@ -35,6 +35,7 @@ public class DriversController {
 	public @ResponseBody Driver replaceDriver(
 				@PathVariable("id") Long id,
 				@RequestParam(required=true) String driver){
+		System.out.println(driver);
 		return dmgr.replaceDriver(driver, id);
 	}
 	

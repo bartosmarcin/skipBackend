@@ -26,12 +26,12 @@ public class DriverTest {
 	@Before
 	public void setUp(){
 		validDriver = new Driver();
-		validDriver.setFirstName("first-Name");
+		validDriver.setFirstName("firstName");
 		validDriver.setLastName("lastName");
 		validDriver.setLatestCoordinates(new Coordinates(20,30));
 		validDriver.setEmail("example@mail.com");
 		validDriver.setPhoneNumber("048123456789");
-		validDriver.setPhoneNumber("048123456789");
+		validDriver.setPhoneNumber2("048123456789");
 	}
 	
 	@Test
@@ -54,6 +54,16 @@ public class DriverTest {
 	@Test
 	public void testFirstNameLength64(){
 		validDriver.setFirstName("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa");
+		Set<ConstraintViolation<Driver>> 
+				constraintViolations = validator.validateProperty(
+						validDriver, "firstName");
+		assertEquals(0, constraintViolations.size());
+
+	}
+	
+	@Test
+	public void testFirstNamePolishChars(){
+		validDriver.setFirstName("ąęćżźłó");
 		Set<ConstraintViolation<Driver>> 
 				constraintViolations = validator.validateProperty(
 						validDriver, "firstName");
