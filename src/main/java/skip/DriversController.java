@@ -25,24 +25,12 @@ public class DriversController {
 		return dmgr.getDriversList();
 	}
 	
-	@RequestMapping(value="/drivers/{id}", method=RequestMethod.DELETE)
-	public @ResponseBody Driver removeDriver(
-				@PathVariable("id") Long id){
-		return dmgr.removeDriver(id);
-	}
-	
 	@RequestMapping(value="/drivers/{id}", method=RequestMethod.POST)
 	public @ResponseBody Driver replaceDriver(
 				@PathVariable("id") Long id,
 				@RequestParam(required=true) String driver){
 		System.out.println(driver);
 		return dmgr.replaceDriver(driver, id);
-	}
-	
-	@RequestMapping(value="/drivers", method=RequestMethod.POST)
-	public @ResponseBody Driver addDriver(
-				@RequestParam(required=true) String driver){
-		return dmgr.addDriver(driver);
 	}
 	
 	@RequestMapping(value="/drivers/{id}/updateCoordinates", method=RequestMethod.POST)
