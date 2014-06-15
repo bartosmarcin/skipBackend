@@ -12,7 +12,7 @@ public class Vehicle {
 	private int truckload;
 	
 	@Size(min=3, max=64)
-	@Pattern(regexp="^[\\p{L}\\d_- ]*$")
+	@Pattern(regexp="^[[\\p{L}]+[ ]?[\\p{L}\\d]+]*$")
 	@NotNull
 	private String brand;
         

@@ -109,7 +109,11 @@ public class StatementsManager {
         } catch (Exception e) {
             session.getTransaction().rollback();
         }
-        return slist;
+        if(slist.size() > 100) {
+            return slist.subList(slist.size() - 100, slist.size());
+        }   else {
+            return slist;
+        }
     }
 
 }
