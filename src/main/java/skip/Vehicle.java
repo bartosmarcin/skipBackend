@@ -2,19 +2,27 @@ package skip;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 public class Vehicle {
 	private long id;
-	
-	@Min(0)
-    @Max(Integer.MAX_VALUE)
+        
 	private int truckload;
 	
-	@Pattern(regexp="^[a-zA-Z-]{3,64}$")
-	private String brand, colour;
+	@Size(min=3, max=64)
+	@Pattern(regexp="^[\\p{L}\\d_- ]*$")
+	@NotNull
+	private String brand;
+        
+        @Size(min=3, max=64)
+	@Pattern(regexp="^[\\p{L}-]*$")
+	@NotNull
+        private String colour;
 	
 	@Pattern(regexp="^[A-Z0-9-]{4,12}$")
+        @NotNull
 	private String registrationNumber;
 	
 	public Vehicle() {}
