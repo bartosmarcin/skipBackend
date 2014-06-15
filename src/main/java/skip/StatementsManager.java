@@ -80,6 +80,7 @@ public class StatementsManager {
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
+            return null;
         }
         return s;
     }

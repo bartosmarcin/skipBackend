@@ -67,6 +67,7 @@ public class VehiclesManager {
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
+            return null;
         }
         return v;
     }
@@ -108,6 +109,7 @@ public class VehiclesManager {
             session.getTransaction().commit();
         } catch (Exception e) {
             session.getTransaction().rollback();
+            return null;
         }
         return v;
     }
